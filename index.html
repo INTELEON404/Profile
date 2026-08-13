@@ -897,73 +897,160 @@
   </script>
   <script>
     (function() {
-    // 1. Create the dark overlay background
+    // Prevent multiple instances from opening
+    if (document.getElementById('inteleon-monitor-overlay')) return;
+
+    // 1. Create the overlay with a modern glass blur effect
     const overlay = document.createElement('div');
-    overlay.style.position = 'fixed';
-    overlay.style.top = '0';
-    overlay.style.left = '0';
-    overlay.style.width = '100vw';
-    overlay.style.height = '100vh';
-    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
-    overlay.style.zIndex = '9998';
-    
-    // 2. Create the popup container
-    const popup = document.createElement('div');
-    popup.style.position = 'fixed';
-    popup.style.top = '50%';
-    popup.style.left = '50%';
-    popup.style.transform = 'translate(-50%, -50%)';
-    popup.style.backgroundColor = '#000000';
-    popup.style.color = '#ffffff';
-    popup.style.border = '2px solid #ffffff';
-    popup.style.padding = '3rem 4rem';
-    popup.style.fontFamily = '"Courier New", Courier, monospace';
-    popup.style.textAlign = 'center';
-    popup.style.zIndex = '9999';
-    popup.style.boxShadow = '0 0 25px rgba(255, 255, 255, 0.15)';
+    overlay.id = 'inteleon-monitor-overlay';
+    Object.assign(overlay.style, {
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        width: '100vw',
+        height: '100vh',
+        backgroundColor: 'rgba(15, 23, 42, 0.65)',
+        backdropFilter: 'blur(8px)',
+        WebkitBackdropFilter: 'blur(8px)',
+        zIndex: '999998',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'
+    });
 
-    // 3. Create the warning text
-    const text = document.createElement('h2');
-    text.innerText = 'INTELEON404 WATCHING YOU :)';
-    text.style.margin = '0 0 2.5rem 0';
-    text.style.fontSize = '1.8rem';
-    text.style.letterSpacing = '3px';
-    text.style.textShadow = '0 0 5px rgba(255, 255, 255, 0.5)';
+    // 2. Create the professional modal card (dark mode UI)
+    const modal = document.createElement('div');
+    Object.assign(modal.style, {
+        backgroundColor: '#0f172a', // Sleek dark slate
+        border: '1px solid #1e293b',
+        borderRadius: '12px',
+        padding: '32px',
+        width: '100%',
+        maxWidth: '420px',
+        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
+        textAlign: 'center',
+        position: 'relative',
+        zIndex: '999999'
+    });
 
-    // 4. Create the disconnect (close) button
+    // 3. Create a subtle "Active" pulsing dot indicator
+    const headerWrapper = document.createElement('div');
+    Object.assign(headerWrapper.style, {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '8px',
+        marginBottom: '16px'
+    });
+
+    const pulseDot = document.createElement('div');
+    Object.assign(pulseDot.style, {
+        width: '8px',
+        height: '8px',
+        backgroundColor: '#10b981', // Emerald green
+        borderRadius: '50%',
+        boxShadow: '0 0 10px #10b981'
+    });
+
+    const headerText = document.createElement('span');
+    headerText.innerText = 'System Monitoring Active';
+    Object.assign(headerText.style, {
+        color: '#94a3b8', // Muted gray
+        fontSize: '12px',
+        fontWeight: '600',
+        textTransform: 'uppercase',
+        letterSpacing: '1px'
+    });
+
+    headerWrapper.appendChild(pulseDot);
+    headerWrapper.appendChild(headerText);
+
+    // 4. Create the main message
+    const title = document.createElement('h2');
+    title.innerText = 'INTELEON404 WATCHING YOU :)';
+    Object.assign(title.style, {
+        color: '#f8fafc', // Crisp white
+        fontSize: '20px',
+        fontWeight: '700',
+        margin: '0 0 8px 0',
+        letterSpacing: '-0.5px'
+    });
+
+    const subtitle = document.createElement('p');
+    subtitle.innerText = 'Your session is currently being observed for security auditing purposes.';
+    Object.assign(subtitle.style, {
+        color: '#94a3b8',
+        fontSize: '14px',
+        lineHeight: '1.5',
+        margin: '0 0 24px 0'
+    });
+
+    // 5. Create a sleek primary action button
     const btn = document.createElement('button');
-    btn.innerText = '[ DISCONNECT ]';
-    btn.style.backgroundColor = '#000000';
-    btn.style.color = '#ffffff';
-    btn.style.border = '1px solid #ffffff';
-    btn.style.padding = '0.8rem 1.5rem';
-    btn.style.fontFamily = 'inherit';
-    btn.style.cursor = 'pointer';
-    btn.style.fontWeight = 'bold';
-    btn.style.fontSize = '1rem';
-    btn.style.transition = 'all 0.2s ease-in-out';
+    btn.innerText = 'Acknowledge';
+    Object.assign(btn.style, {
+        backgroundColor: '#3b82f6', // Professional blue
+        color: '#ffffff',
+        border: 'none',
+        borderRadius: '6px',
+        padding: '10px 24px',
+        fontSize: '14px',
+        fontWeight: '600',
+        cursor: 'pointer',
+        width: '100%',
+        transition: 'background-color 0.2s ease, transform 0.1s ease'
+    });
 
-    // Hover effects for the popup button
-    btn.onmouseover = () => {
-        btn.style.backgroundColor = '#ffffff';
-        btn.style.color = '#000000';
-    };
-    btn.onmouseout = () => {
-        btn.style.backgroundColor = '#000000';
-        btn.style.color = '#ffffff';
-    };
+    // Button interactions
+    btn.onmouseover = () => btn.style.backgroundColor = '#2563eb'; // Darker blue
+    btn.onmouseout = () => btn.style.backgroundColor = '#3b82f6';
+    btn.onmousedown = () => btn.style.transform = 'scale(0.98)';
+    btn.onmouseup = () => btn.style.transform = 'scale(1)';
 
-    // Close logic: removes the elements from the DOM
+    // 6. Close logic with smooth fade-out animation
     btn.onclick = () => {
-        document.body.removeChild(overlay);
-        document.body.removeChild(popup);
+        // Animate out
+        const fadeOut = overlay.animate([
+            { opacity: 1 },
+            { opacity: 0 }
+        ], { duration: 250, easing: 'ease-in' });
+
+        modal.animate([
+            { opacity: 1, transform: 'scale(1) translateY(0)' },
+            { opacity: 0, transform: 'scale(0.95) translateY(10px)' }
+        ], { duration: 250, easing: 'ease-in' });
+
+        // Remove from DOM after animation completes
+        fadeOut.onfinish = () => document.body.removeChild(overlay);
     };
 
-    // 5. Assemble everything and inject it into the page
-    popup.appendChild(text);
-    popup.appendChild(btn);
+    // 7. Assemble the DOM
+    modal.appendChild(headerWrapper);
+    modal.appendChild(title);
+    modal.appendChild(subtitle);
+    modal.appendChild(btn);
+    overlay.appendChild(modal);
     document.body.appendChild(overlay);
-    document.body.appendChild(popup);
+
+    // 8. Trigger entrance animations using Web Animations API
+    overlay.animate([
+        { opacity: 0 },
+        { opacity: 1 }
+    ], { duration: 300, easing: 'ease-out' });
+
+    modal.animate([
+        { opacity: 0, transform: 'scale(0.95) translateY(10px)' },
+        { opacity: 1, transform: 'scale(1) translateY(0)' }
+    ], { duration: 300, easing: 'ease-out' });
+
+    // Optional: Add a pulsing animation to the green dot
+    pulseDot.animate([
+        { opacity: 1, transform: 'scale(1)' },
+        { opacity: 0.5, transform: 'scale(1.2)' },
+        { opacity: 1, transform: 'scale(1)' }
+    ], { duration: 2000, iterations: Infinity });
+
 })();
   </script>
 </body>
