@@ -1,4 +1,974 @@
-<h1>
-  <i>Hello World</i>
-  <b>I am INTELEON404</b>
-</h1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>INTELEON404 | IQ00 597 </title>
+
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --primary-color: #0ff5bfb1;
+      /* Cyan/Teal for accents */
+      --secondary-color: #ff0055;
+      /* Red/Pink for alerts/errors */
+      --bg-dark: #0a0a0a;
+      --glass-bg: rgba(20, 20, 20, 0.6);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --text-main: #e0e0e0;
+      --text-muted: #a0a0a0;
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-dark);
+      background-image:
+        linear-gradient(to bottom, rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.95)),
+        url("https://images.pexels.com/photos/1287075/pexels-photo-1287075.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      overflow-x: hidden;
+      font-family: 'Rajdhani', sans-serif;
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #000;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #333;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-color);
+    }
+
+    /* --------------------------
+       HERO & FOG
+       -------------------------- */
+    .hero-wrapper {
+      height: 100vh;
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #canvas {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.8;
+      /* Increased opacity for better smoke visibility */
+    }
+
+    #cont {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .glitch-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(3rem, 8vw, 8rem);
+      font-weight: 900;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
+      position: relative;
+    }
+
+    .glitch-title::before,
+    .glitch-title::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+    }
+
+    .glitch-title::before {
+      left: 2px;
+      text-shadow: -1px 0 #ff0055;
+      clip: rect(24px, 550px, 90px, 0);
+      animation: glitch-anim-2 3s infinite linear alternate-reverse;
+    }
+
+    .glitch-title::after {
+      left: -2px;
+      text-shadow: -1px 0 #00ffcc;
+      clip: rect(85px, 550px, 140px, 0);
+      animation: glitch-anim 2.5s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch-anim {
+      0% {
+        clip: rect(10px, 9999px, 30px, 0);
+      }
+
+      20% {
+        clip: rect(80px, 9999px, 100px, 0);
+      }
+
+      40% {
+        clip: rect(10px, 9999px, 50px, 0);
+      }
+
+      60% {
+        clip: rect(40px, 9999px, 90px, 0);
+      }
+
+      80% {
+        clip: rect(20px, 9999px, 60px, 0);
+      }
+
+      100% {
+        clip: rect(70px, 9999px, 120px, 0);
+      }
+    }
+
+    @keyframes glitch-anim-2 {
+      0% {
+        clip: rect(60px, 9999px, 90px, 0);
+      }
+
+      20% {
+        clip: rect(10px, 9999px, 50px, 0);
+      }
+
+      40% {
+        clip: rect(90px, 9999px, 120px, 0);
+      }
+
+      60% {
+        clip: rect(20px, 9999px, 40px, 0);
+      }
+
+      80% {
+        clip: rect(50px, 9999px, 80px, 0);
+      }
+
+      100% {
+        clip: rect(10px, 9999px, 30px, 0);
+      }
+    }
+
+    .subtitle {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: clamp(1rem, 2vw, 1.5rem);
+      color: var(--primary-color);
+      margin-top: 10px;
+      opacity: 0;
+      animation: fadeIn 2s ease-out forwards 1s;
+    }
+
+    .inteleon-badge {
+      margin-top: 20px;
+      opacity: 0;
+      animation: fadeIn 2s ease-out forwards 1.5s;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      animation: bounce 2s infinite;
+      z-index: 10;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .scroll-indicator:hover {
+      color: #fff;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      20%,
+      50%,
+      80%,
+      100% {
+        transform: translate(-50%, 0);
+      }
+
+      40% {
+        transform: translate(-50%, -10px);
+      }
+
+      60% {
+        transform: translate(-50%, -5px);
+      }
+    }
+
+    /* --------------------------
+       NAVIGATION
+       -------------------------- */
+    .fixed-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(5, 5, 5, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 1000;
+      padding: 15px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--glass-border);
+      transition: all 0.3s ease;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: white;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid var(--primary-color);
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #fff;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary-color);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* --------------------------
+       CONTENT SECTIONS
+       -------------------------- */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 5;
+    }
+
+    section {
+      margin: 100px 0;
+      padding: 60px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s;
+    }
+
+    section:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    h2::before {
+      content: '//';
+      color: var(--primary-color);
+      font-weight: 900;
+    }
+
+    /* About */
+    .about-text {
+      font-size: 1.1rem;
+      color: var(--text-main);
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .highlight {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    /* Skills */
+    .skills-container {
+      border: 2px solid #22F700;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .skills-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    /* Certifications */
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .cert-card {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--glass-border);
+      transition: 0.4s;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .cert-card:hover {
+      border-color: var(--primary-color);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 255, 204, 0.1);
+    }
+
+    .cert-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      opacity: 0.8;
+      transition: 0.3s;
+    }
+
+    .cert-card:hover img {
+      opacity: 1;
+    }
+
+    .cert-info {
+      padding: 15px;
+      text-align: center;
+      border-top: 1px solid var(--glass-border);
+    }
+
+    .cert-title {
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* Contact */
+    .social-section {
+      text-align: center;
+    }
+
+    .social-badges {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .donate-badges {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      background: #050505;
+      color: #666;
+      font-family: 'Share Tech Mono';
+      font-size: 0.9rem;
+      border-top: 1px solid #111;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(10px);
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal.show {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-content {
+      max-width: 90%;
+      max-height: 90vh;
+      border: 1px solid var(--primary-color);
+      box-shadow: 0 0 30px rgba(0, 255, 204, 0.2);
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 30px;
+      right: 50px;
+      color: #fff;
+      font-size: 40px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .close-modal:hover {
+      color: var(--primary-color);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      /* Mobile menu could be added here */
+      section {
+        padding: 40px 20px;
+        margin: 60px 0;
+      }
+
+      .glitch-title {
+        font-size: 15vw;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="fixed-header">
+    <a href="#" class="logo">
+      <img src="https://raw.githubusercontent.com/INTELEON404/Template/refs/heads/main/INTELEON404.png" alt="INTELEON404">
+      INTELEON404
+    </a>
+    <div class="nav-links">
+      <a href="#about">ABOUT</a>
+      <a href="#skills">SKILLS</a>
+      <a href="#certifications">CERT'S</a>
+      <a href="#contact">CONTACT</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="hero-wrapper">
+    <div id="canvas"></div> <!-- Fog Canvas -->
+
+    <div id="cont">
+      <div class="glitch-title" data-text="INTELEON404">INTELEON404</div>
+      <div class="subtitle">Elite Ethical Hacker & Red Team Operator</div>
+      <div class="inteleon-badge">
+        <a href="https://youtube.com/@INTELEON404">
+          <img title="INTELEON404"
+            src="https://img.shields.io/badge/INTELEON%20404-SCRIPT?colorA=%23cc0000&colorB=%23000000&style=for-the-badge">
+        </a>
+      </div>
+    </div>
+
+    <div class="scroll-indicator" onclick="document.getElementById('about').scrollIntoView()">
+      <i class="fa-solid fa-chevron-down"></i>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <section id="about">
+      <h2>Who Am I?</h2>
+      <p class="about-text">
+        I am <span class="highlight">Sheikh Mohammad Adil</span>, operating under the alias <span
+          class="highlight">INTELEON404</span>.<br><br>
+        A Bangladesh-based <strong>Ethical Hacker</strong> & <strong>Red Team Operator</strong> dedicated to securing
+        the digital frontier. My mission is to expose vulnerabilities before they can be exploited.
+        <br><br>
+        <em>"Quiet as the fog, striking like the storm."</em>
+      </p>
+    </section>
+
+    <section id="skills">
+      <h2>Arsenal</h2>
+      <div class="skills-container">
+        <div class="skills-badges">
+          <img src="https://img.shields.io/badge/Burp_Suite-FF6633?style=for-the-badge&logo=burp-suite&color=000000"
+            alt="Burp Suite" />
+          <img src="https://img.shields.io/badge/Metasploit-008C8C?style=for-the-badge&logo=metasploit&color=000000"
+            alt="Metasploit" />
+          <img src="https://img.shields.io/badge/Wireshark-009639?style=for-the-badge&logo=wireshark&color=000000"
+            alt="Wireshark" />
+          <img src="https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnu-bash&color=000000"
+            alt="Bash" />
+          <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&color=000000"
+            alt="Python" />
+          <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&color=000000"
+            alt="Linux" />
+          <img src="https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&color=000000" alt="Go" />
+          <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&color=000000" alt="Git" />
+          <img src="https://img.shields.io/badge/Debian-D70A53?style=for-the-badge&logo=debian&color=000000"
+            alt="Debian" />
+          <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&color=000000"
+            alt="Docker" />
+          <img src="https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&color=000000" alt="C" />
+          <img src="https://img.shields.io/badge/C%2B%2B-F34B7F?style=for-the-badge&logo=c%2B%2B&color=000000"
+            alt="C++" />
+          <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&color=000000" alt="Java" />
+          <img src="https://img.shields.io/badge/HTML5-5D4B6C?style=for-the-badge&logo=html5&color=000000"
+            alt="HTML5" />
+          <img src="https://img.shields.io/badge/CSS3-2965F1?style=for-the-badge&logo=css3&color=000000" alt="CSS3" />
+          <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&color=000000"
+            alt="JavaScript" />
+          <img src="https://img.shields.io/badge/BlackArch-0A0A0A?style=for-the-badge&logo=blackarch&color=000000"
+            alt="BlackArch" />
+          <img src="https://img.shields.io/badge/Parrot_OS-2E8E8F?style=for-the-badge&logo=parrot&color=000000"
+            alt="Parrot OS" />
+          <img src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&color=000000"
+            alt="Ubuntu" />
+          <img src="https://img.shields.io/badge/Kali_Linux-557C94?style=for-the-badge&logo=kali-linux&color=000000"
+            alt="Kali Linux" />
+          <img
+            src="https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visual-studio-code&color=000000"
+            alt="VS Code" />
+        </div>
+      </div>
+    </section>
+
+    <section id="certifications">
+      <h2>Achievements</h2>
+      <div class="certs-grid">
+        <!-- Certificate 1: Sheikh Mohammad Adil -->
+        <div class="cert-card"
+          onclick="openModal('https://github.com/INTELEON404/Template/blob/main/CERTIFICATIONS/Sheikh%20Mohammad%20Adil.png?raw=true')">
+          <img src="https://github.com/INTELEON404/Template/blob/main/CERTIFICATIONS/Sheikh%20Mohammad%20Adil.png?raw=true"
+            alt="Sheikh Mohammad Adil">
+          <div class="cert-info">
+            <div class="cert-title">SHEIKH MOHAMMAD ADIL</div>
+          </div>
+        </div>
+
+        <!-- Certificate 2: ehp -->
+        <div class="cert-card"
+          onclick="openModal('https://github.com/INTELEON404/Template/blob/main/CERTIFICATIONS/ehp.png?raw=true')">
+          <img src="https://github.com/INTELEON404/Template/blob/main/CERTIFICATIONS/ehp.png?raw=true"
+            alt="Ethical Hacking Professional">
+          <div class="cert-info">
+            <div class="cert-title">ETHICAL HACKING PROFESSIONAL</div>
+          </div>
+        </div>
+
+        <!-- Certificate 3: CRTA -->
+        <div class="cert-card"
+          onclick="openModal('https://github.com/INTELEON404/Template/blob/main/CERTIFICATIONS/CRTA.png?raw=true')">
+          <img src="https://github.com/INTELEON404/Template/blob/main/CERTIFICATIONS/CRTA.png?raw=true"
+            alt="CRTA">
+          <div class="cert-info">
+            <div class="cert-title">CERTIFIED RED TEAM ANALYST</div>
+          </div>
+        </div>
+
+        <!-- Certificate 4: GCSP -->
+        <div class="cert-card"
+          onclick="openModal('https://github.com/INTELEON404/Template/blob/main/CERTIFICATIONS/GCSP.png?raw=true')">
+          <img src="https://github.com/INTELEON404/Template/blob/main/CERTIFICATIONS/GCSP.png?raw=true"
+            alt="Google Cybersecurity">
+          <div class="cert-info">
+            <div class="cert-title">GOOGLE CYBERSECURITY</div>
+          </div>
+        </div>
+
+        <!-- Certificate 5: Cyber Security 101 -->
+        <div class="cert-card"
+          onclick="openModal('https://github.com/INTELEON404/Template/blob/main/CERTIFICATIONS/Cyber%20Security%20101.png?raw=true')">
+          <img src="https://github.com/INTELEON404/Template/blob/main/CERTIFICATIONS/Cyber%20Security%20101.png?raw=true"
+            alt="Cyber Security 101">
+          <div class="cert-info">
+            <div class="cert-title">CYBER SECURITY 101</div>
+          </div>
+        </div>
+
+        <!-- Certificate 6: Jr Penetration Tester -->
+        <div class="cert-card"
+          onclick="openModal('https://github.com/INTELEON404/Template/blob/main/CERTIFICATIONS/Jr%20Penetration%20Tester.png?raw=true')">
+          <img src="https://github.com/INTELEON404/Template/blob/main/CERTIFICATIONS/Jr%20Penetration%20Tester.png?raw=true"
+            alt="Jr Penetration Tester">
+          <div class="cert-info">
+            <div class="cert-title">JR PENETRATION TESTER</div>
+          </div>
+        </div>
+
+        <!-- Certificate 7: Web Application Pentesting -->
+        <div class="cert-card"
+          onclick="openModal('https://github.com/INTELEON404/Template/blob/main/CERTIFICATIONS/Web%20Application%20Pentesting.png?raw=true')">
+          <img src="https://github.com/INTELEON404/Template/blob/main/CERTIFICATIONS/Web%20Application%20Pentesting.png?raw=true"
+            alt="Web Application Pentesting">
+          <div class="cert-info">
+            <div class="cert-title">WEB APP PENTESTING</div>
+          </div>
+        </div>
+
+        <!-- Certificate 8: Web Application Red Teaming -->
+        <div class="cert-card"
+          onclick="openModal('https://github.com/INTELEON404/Template/blob/main/CERTIFICATIONS/Web%20Application%20Red%20Teaming.png?raw=true')">
+          <img src="https://github.com/INTELEON404/Template/blob/main/CERTIFICATIONS/Web%20Application%20Red%20Teaming.png?raw=true"
+            alt="Web Application Red Teaming">
+          <div class="cert-info">
+            <div class="cert-title">WEB APP RED TEAMING</div>
+          </div>
+        </div>
+
+        <!-- Certificate 9: Red Teaming -->
+        <div class="cert-card"
+          onclick="openModal('https://github.com/INTELEON404/Template/blob/main/CERTIFICATIONS/Red%20Teaming.png?raw=true')">
+          <img src="https://github.com/INTELEON404/Template/blob/main/CERTIFICATIONS/Red%20Teaming.png?raw=true"
+            alt="Red Teaming">
+          <div class="cert-info">
+            <div class="cert-title">RED TEAMING</div>
+          </div>
+        </div>
+
+        <!-- Certificate 10: Offensive Pentesting -->
+        <div class="cert-card"
+          onclick="openModal('https://github.com/INTELEON404/Template/blob/main/CERTIFICATIONS/Offensive%20Pentesting.png?raw=true')">
+          <img src="https://github.com/INTELEON404/Template/blob/main/CERTIFICATIONS/Offensive%20Pentesting.png?raw=true"
+            alt="Offensive Pentesting">
+          <div class="cert-info">
+            <div class="cert-title">OFFENSIVE PENTESTING</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Connect</h2>
+      <div class="social-section">
+        <h3>Find Me Around the Web</h3>
+        <div class="social-badges">
+          <a href="https://www.youtube.com/@INTELEON404?sub_confirmation=1" target="_blank"><img
+              src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white"
+              alt="YouTube"></a>
+          <a href="https://www.linkedin.com/in/inteleon404" target="_blank"><img
+              src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"
+              alt="LinkedIn"></a>
+          <a href="https://medium.com/@INTELEON404" target="_blank"><img
+              src="https://img.shields.io/badge/Medium-000000?style=for-the-badge&logo=medium&logoColor=white"
+              alt="Medium"></a>
+          <a href="https://t.me/INTELEON404" target="_blank"><img
+              src="https://img.shields.io/badge/Telegram-0088CC?style=for-the-badge&logo=telegram&logoColor=white"
+              alt="Telegram"></a>
+          <a href="https://x.com/INTELEON404" target="_blank"><img
+              src="https://img.shields.io/badge/twitter-000000?style=for-the-badge&logo=x&logoColor=white"
+              alt="twitter"></a>
+          <a href="https://discord.gg/354daJmkHs" target="_blank"><img
+              src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white"
+              alt="Discord"></a>
+          <a href="mailto:inteleon404@proton.me"><img
+              src="https://img.shields.io/badge/ProtonMail-8B89CC?style=for-the-badge&logo=protonmail&logoColor=white"
+              alt="Email"></a>
+
+        </div>
+
+        <h3>Support My Work</h3>
+        <div class="donate-badges">
+          <a href="https://buymeacoffee.com/INTELEON404" target="_blank"><img
+              src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black"
+              alt="BuyMeACoffee"></a>
+          <a href="https://paypal.me/INTELEON404" target="_blank"><img
+              src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white"
+              alt="PayPal"></a>
+          <a href="https://patreon.com/INTELEON404" target="_blank"><img
+              src="https://img.shields.io/badge/Patreon-F96854?style=for-the-badge&logo=patreon&logoColor=white"
+              alt="Patreon"></a>
+          <a href="https://ko-fi.com/INTELEON404" target="_blank"><img
+              src="https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white"
+              alt="Ko-Fi"></a>
+          <a href="https://www.supportkori.com/inteleon404" target="_blank"><img
+              src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black"
+              alt="SupportKori"></a>
+          
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <p>© 2026 INTELEON404 | IQ00 597</p>
+  </footer>
+
+  <!-- Image Modal -->
+  <div id="imageModal" class="modal" onclick="closeModal()">
+    <span class="close-modal">&times;</span>
+    <img class="modal-content" id="img01">
+  </div>
+
+  <script>
+    // --- Fog Animation Logic (Enhanced) ---
+    const canvas = document.getElementById("canvas");
+    const fogs = [];
+
+    class Fog {
+      constructor(x, y, width, height, speed, direction) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.speed = speed;
+        this.direction = direction; // 0 = left, 1 = right
+        this.element = document.createElement("div");
+        this.init();
+      }
+
+      init() {
+        this.element.style.width = `${this.width}px`;
+        this.element.style.height = `${this.height}px`;
+        // Changed to a more "smoky" gradient
+        this.element.style.background = "radial-gradient(circle, rgba(200,200,200,0.5) 0%, rgba(100,100,100,0.1) 50%, rgba(0,0,0,0) 80%)";
+        this.element.style.position = "absolute";
+        this.element.style.filter = "blur(50px)"; // Increased blur for smoke effect
+        this.element.style.borderRadius = "40%"; // Irregular shape
+        this.element.style.pointerEvents = "none";
+        this.element.style.transform = `rotate(${Math.random() * 360}deg)`; // Random rotation
+        canvas.appendChild(this.element);
+      }
+
+      update() {
+        if (this.direction === 0) {
+          this.x -= this.speed;
+          if (this.x + this.width < 0) this.x = canvas.clientWidth;
+        } else {
+          this.x += this.speed;
+          if (this.x > canvas.clientWidth) this.x = -this.width;
+        }
+        this.element.style.left = `${this.x}px`;
+        this.element.style.top = `${this.y}px`;
+      }
+    }
+
+    // Initialize Fog Elements
+    function initFog() {
+      const fogCount = 20; // Increased count for denser smoke
+      for (let i = 0; i < fogCount; i++) {
+        const w = 300 + Math.random() * 400; // Larger clouds
+        const h = 200 + Math.random() * 200;
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight;
+        const speed = 0.1 + Math.random() * 0.4; // Slower, drifting speed
+        const dir = Math.random() > 0.5 ? 1 : 0;
+        fogs.push(new Fog(x, y, w, h, speed, dir));
+      }
+    }
+
+    function animateFog() {
+      fogs.forEach(fog => fog.update());
+      requestAnimationFrame(animateFog);
+    }
+
+    initFog();
+    animateFog();
+
+    // --- Modal Logic ---
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("img01");
+
+    function openModal(src) {
+      modal.style.display = "flex";
+      setTimeout(() => modal.classList.add("show"), 10);
+      modalImg.src = src;
+    }
+
+    function closeModal() {
+      modal.classList.remove("show");
+      setTimeout(() => modal.style.display = "none", 300);
+    }
+
+    document.addEventListener('keydown', (e) => { if (e.key === "Escape") closeModal(); });
+    modalImg.onclick = (e) => e.stopPropagation();
+
+    // --- Active Nav Link Logic ---
+    const sections = document.querySelectorAll('section');
+    const navLi = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLi.forEach(a => {
+        a.classList.remove('active');
+        if (a.getAttribute('href').includes(current)) {
+          a.classList.add('active');
+        }
+      });
+    });
+  </script>
+  <script>
+    (function() {
+    // 1. Create the dark overlay background
+    const overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100vw';
+    overlay.style.height = '100vh';
+    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
+    overlay.style.zIndex = '9998';
+    
+    // 2. Create the popup container
+    const popup = document.createElement('div');
+    popup.style.position = 'fixed';
+    popup.style.top = '50%';
+    popup.style.left = '50%';
+    popup.style.transform = 'translate(-50%, -50%)';
+    popup.style.backgroundColor = '#000000';
+    popup.style.color = '#ffffff';
+    popup.style.border = '2px solid #ffffff';
+    popup.style.padding = '3rem 4rem';
+    popup.style.fontFamily = '"Courier New", Courier, monospace';
+    popup.style.textAlign = 'center';
+    popup.style.zIndex = '9999';
+    popup.style.boxShadow = '0 0 25px rgba(255, 255, 255, 0.15)';
+
+    // 3. Create the warning text
+    const text = document.createElement('h2');
+    text.innerText = 'INTELEON404 WATCHING YOU :)';
+    text.style.margin = '0 0 2.5rem 0';
+    text.style.fontSize = '1.8rem';
+    text.style.letterSpacing = '3px';
+    text.style.textShadow = '0 0 5px rgba(255, 255, 255, 0.5)';
+
+    // 4. Create the disconnect (close) button
+    const btn = document.createElement('button');
+    btn.innerText = '[ DISCONNECT ]';
+    btn.style.backgroundColor = '#000000';
+    btn.style.color = '#ffffff';
+    btn.style.border = '1px solid #ffffff';
+    btn.style.padding = '0.8rem 1.5rem';
+    btn.style.fontFamily = 'inherit';
+    btn.style.cursor = 'pointer';
+    btn.style.fontWeight = 'bold';
+    btn.style.fontSize = '1rem';
+    btn.style.transition = 'all 0.2s ease-in-out';
+
+    // Hover effects for the popup button
+    btn.onmouseover = () => {
+        btn.style.backgroundColor = '#ffffff';
+        btn.style.color = '#000000';
+    };
+    btn.onmouseout = () => {
+        btn.style.backgroundColor = '#000000';
+        btn.style.color = '#ffffff';
+    };
+
+    // Close logic: removes the elements from the DOM
+    btn.onclick = () => {
+        document.body.removeChild(overlay);
+        document.body.removeChild(popup);
+    };
+
+    // 5. Assemble everything and inject it into the page
+    popup.appendChild(text);
+    popup.appendChild(btn);
+    document.body.appendChild(overlay);
+    document.body.appendChild(popup);
+})();
+  </script>
+</body>
+</html>
+
+
+
+
